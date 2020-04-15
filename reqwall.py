@@ -26,6 +26,7 @@ import argparse
 import requests as req
 import pyperclip
 from bs4 import BeautifulSoup as bs
+from tqdm import tqdm
 
 
 URL = "http://getwallpapers.com/search?term="
@@ -46,7 +47,7 @@ def save_image(url_and_collection):
         os.path.join("wallpapers", collection, os.path.basename(image_url)), "wb"
     ) as f:
         logging.info(f"Saving image: {os.path.basename(image_url)}")
-        for chunk in res.iter_content(100000):
+        for chunk in res.iter_content(1024):
             f.write(chunk)
 
 
@@ -86,7 +87,7 @@ def load_and_search(url, query, func1, func2):
     res.raise_for_status()
     soup = bs(res.text, "html.parser")
 
-    for i in soup.select(query):
+    for i in tqdm(soup.select(query)):
         func1(func2(i))
 
 

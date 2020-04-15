@@ -4,6 +4,7 @@ RUN mkdir /app
 WORKDIR "/app"
 
 RUN pip install pipenv
+USER 1000
 
 ADD Pipfile* reqwall.py /app/.
 

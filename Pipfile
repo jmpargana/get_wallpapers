@@ -10,6 +10,8 @@ black = "*"
 requests = "*"
 bs4 = "*"
 pyperclip = "*"
+pil = "*"
+tqdm = "*"
 
 [requires]
 python_version = "3.8"
